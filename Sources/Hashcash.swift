@@ -88,8 +88,9 @@ public func check(stamp: String,
     }
 
     if let expiration = expiration {
-        let goodUntilDate = Date(timeIntervalSinceNow: TimeInterval(expiration))
+        let goodUntilDate = Date(timeIntervalSinceNow: -TimeInterval(expiration))
         if (stamped.date < goodUntilDate) {
+            print("Stamp expired")
             return false
         }
     }

@@ -91,6 +91,14 @@ class HashcashTests: XCTestCase {
         XCTAssertFalse(stampCheck)
     }
 
+    func testCheckNotExpired() {
+        let stamp = mint(resource: "foo", bits: 8)
+        XCTAssertNotNil(stamp)
+
+        let stampCheck = check(stamp: stamp!, resource: "foo", bits: 8, expiration: 3600)
+        XCTAssertTrue(stampCheck)
+    }
+
     static var allTests : [(String, (HashcashTests) -> () throws -> Void)] {
         return [
             ("testSaltLength", testSaltLength),
@@ -102,6 +110,7 @@ class HashcashTests: XCTestCase {
             ("testMintValid", testMintValid),
             ("testMintDifferentResource", testMintDifferentResource),
             ("testMintDifferentBits", testMintDifferentBits),
+            ("testCheckNotExpired", testCheckNotExpired),
         ]
     }
 }
